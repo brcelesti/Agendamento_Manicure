@@ -622,7 +622,7 @@
     // ⚠️ SUBSTITUA pela URL da sua implantação
     //    do Google Apps Script
     // =============================================
-    const API_URL = 'https://script.google.com/macros/s/AKfycbz-AqYBUHcrvUEV6mGWTTxjIZ98uT0CHl4FyefMg4Mb2i-TZZJBTPOPImcc2t9yU-2ghw/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyMarcEB20MrpMVQgQsqlGYpf3_Jj0jjiOgD9SjAGmDAuH6IlFJJvI9T_izGGV6EzdlEw/exec';
 
     // --- Sincroniza clique no card com o select ---
     function selecionarServico(card) {
@@ -649,12 +649,11 @@
         return;
       }
 
-      fetch(`${API_URL}?acao=horarios&data=${formatarData(data)}`)
-        .then(r => r.json())
-        .then(d => exibirHorarios(d.horarios || []))
-        .catch(() => {
-          grade.innerHTML = '<span class="msg-horarios">Erro ao carregar horários. Tente novamente.</span>';
-        });
+      jsonp(API_URL + '?acao=horarios&data=' + formatarData(data), function(d) {
+        exibirHorarios(d.horarios || []);
+      }, function() {
+        grade.innerHTML = '<span class="msg-horarios">Erro ao carregar horários. Tente novamente.</span>';
+      });
     });
 
     function formatarData(iso) {
@@ -711,24 +710,18 @@
         return;
       }
 
-      fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          acao: 'criar',
-          nome, whatsapp, servico,
-          data: formatarData(data),
-          horario: horarioSelecionado,
-          obs
-        })
-      })
-      .then(r => r.json())
-      .then(d => {
+      const params = new URLSearchParams({
+        acao: 'criar', nome, whatsapp, servico,
+        data: formatarData(data),
+        horario: horarioSelecionado,
+        obs
+      });
+      jsonp(API_URL + '?' + params.toString(), function(d) {
         btn.disabled = false;
         btn.textContent = 'Confirmar agendamento';
         if (d.sucesso) {
           mostrarFeedback('ok', 'Agendamento confirmado! ✨',
-            `Olá, ${nome}! Seu horário para ${servico} no dia ${formatarData(data)} às ${horarioSelecionado} foi reservado com sucesso. Código: ${d.id}`);
+            'Olá, ' + nome + '! Seu horário para ' + servico + ' no dia ' + formatarData(data) + ' às ' + horarioSelecionado + ' foi reservado. Código: ' + d.id);
           document.getElementById('nome').value = '';
           document.getElementById('whatsapp').value = '';
           document.getElementById('obs').value = '';
@@ -739,12 +732,37 @@
         } else {
           mostrarFeedback('erro', 'Não foi possível agendar', d.mensagem || 'Tente outro horário.');
         }
-      })
-      .catch(() => {
+      }, function() {
         btn.disabled = false;
         btn.textContent = 'Confirmar agendamento';
         mostrarFeedback('erro', 'Erro de conexão', 'Verifique sua internet e tente novamente.');
       });
+    }
+
+
+    // --- JSONP helper (contorna CORS do Apps Script) ---
+    function jsonp(url, onSuccess, onError) {
+      const cbName = 'cb_' + Date.now();
+      const script = document.createElement('script');
+      const timeout = setTimeout(() => {
+        cleanup();
+        if (onError) onError();
+      }, 8000);
+
+      function cleanup() {
+        delete window[cbName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+        clearTimeout(timeout);
+      }
+
+      window[cbName] = function(data) {
+        cleanup();
+        onSuccess(data);
+      };
+
+      script.src = url + '&callback=' + cbName;
+      script.onerror = function() { cleanup(); if (onError) onError(); };
+      document.head.appendChild(script);
     }
 
     function mostrarFeedback(tipo, titulo, texto) {
