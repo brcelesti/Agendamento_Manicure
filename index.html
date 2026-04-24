@@ -555,9 +555,7 @@
       <p class="section-label">Reservar horário</p>
       <h2 class="section-title">Seu <em>agendamento</em></h2>
 
-      <div class="aviso-api" id="aviso-api">
-        <strong>⚙️ Configuração necessária:</strong> Substitua o valor de <code>API_URL</code> no início do JavaScript pelo link da sua implantação do Google Apps Script.
-      </div>
+
 
       <div class="form-grid">
         <div class="campo">
@@ -624,7 +622,7 @@
     // ⚠️ SUBSTITUA pela URL da sua implantação
     //    do Google Apps Script
     // =============================================
-    const API_URL = 'https://script.google.com/macros/s/AKfycbzmTyp8dpyVNXqojG1I2-LdY-4vabDunHJbEUtmkPcC30dlybysfdP7yqutbBSrtkd44g/exec';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbw7ZBHwq-Hvy_tAUJb7_Oxmnxepy4fHFickGGFS0mmE0NGlsqFoUI2fe3Ss1iYUBB2LBQ/exec';
 
     // --- Sincroniza clique no card com o select ---
     function selecionarServico(card) {
@@ -645,7 +643,7 @@
       const grade = document.getElementById('grade-horarios');
       grade.innerHTML = '<span class="msg-horarios"><span class="spinner"></span> Buscando horários...</span>';
 
-      if (API_URL === 'SUA_URL_DO_APPS_SCRIPT_AQUI') {
+      if (false) {
         // Modo demonstração sem API
         setTimeout(() => exibirHorarios(['09:00','10:00','11:00','14:00','15:00','16:00','17:00']), 600);
         return;
@@ -703,7 +701,7 @@
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span> Confirmando...';
 
-      if (API_URL === 'SUA_URL_DO_APPS_SCRIPT_AQUI') {
+      if (false) {
         setTimeout(() => {
           btn.disabled = false;
           btn.textContent = 'Confirmar agendamento';
