@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bheatriz Freitas · Nail Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --verde-escuro:   #2d4a2d;
+      --verde-musgo:    #4a6741;
+      --verde-medio:    #6b8f5e;
+      --verde-claro:    #a8c49a;
+      --verde-palido:   #d4e8cc;
+      --verde-creme:    #eef5ea;
+      --creme:          #f7f3ee;
+      --creme-escuro:   #ede8e0;
+      --texto:          #2a2a24;
+      --texto-suave:    #5a5a50;
+      --branco:         #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--creme);
+      color: var(--texto);
+      min-height: 100vh;
+    }
+
+    /* ---- HERO ---- */
+    header {
+      background: var(--verde-escuro);
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(107,143,94,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 350px; height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,196,154,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 3rem;
+      position: relative; z-index: 2;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--verde-palido);
+      letter-spacing: 0.05em;
+    }
+
+    .logo span {
+      font-style: italic;
+      color: var(--verde-claro);
+    }
+
+    nav a {
+      color: var(--verde-claro);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    nav a:hover { opacity: 1; }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 4rem 3rem;
+      position: relative; z-index: 2;
+      max-width: 680px;
+    }
+
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--verde-claro);
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300;
+      color: var(--creme);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--verde-claro);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--verde-palido);
+      opacity: 0.75;
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-agendar {
+      background: var(--verde-claro);
+      color: var(--verde-escuro);
+      border: none;
+      padding: 1rem 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-agendar:hover {
+      background: var(--verde-palido);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      padding: 2rem 3rem;
+      position: relative; z-index: 2;
+      color: var(--verde-claro);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    /* ---- SERVIÇOS ---- */
+    .servicos {
+      background: var(--creme);
+      padding: 6rem 3rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--verde-musgo);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      color: var(--verde-escuro);
+      margin-bottom: 3rem;
+    }
+
+    .section-title em { font-style: italic; }
+
+    .grid-servicos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--verde-palido);
+      border: 1px solid var(--verde-palido);
+    }
+
+    .card-servico {
+      background: var(--creme);
+      padding: 2rem 1.75rem;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+
+    .card-servico:hover { background: var(--verde-creme); }
+    .card-servico.selecionado {
+      background: var(--verde-escuro);
+    }
+    .card-servico.selecionado .serv-nome { color: var(--verde-claro); }
+    .card-servico.selecionado .serv-desc,
+    .card-servico.selecionado .serv-duracao { color: var(--verde-palido); opacity: 0.7; }
+
+    .serv-icone {
+      width: 32px; height: 32px;
+      margin-bottom: 1rem;
+      color: var(--verde-musgo);
+    }
+    .card-servico.selecionado .serv-icone { color: var(--verde-claro); }
+
+    .serv-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--verde-escuro);
+      margin-bottom: 0.4rem;
+    }
+
+    .serv-desc {
+      font-size: 0.82rem;
+      color: var(--texto-suave);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .serv-duracao {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--verde-musgo);
+    }
+
+    /* ---- AGENDAMENTO ---- */
+    .agendamento {
+      background: var(--verde-creme);
+      padding: 6rem 3rem;
+    }
+
+    .form-wrapper {
+      max-width: 720px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      nav { padding: 1.5rem; }
+      .hero-content, .servicos, .agendamento { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .campo label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--verde-musgo);
+      font-weight: 500;
+    }
+
+    .campo input,
+    .campo select,
+    .campo textarea {
+      background: var(--branco);
+      border: 1px solid var(--verde-palido);
+      padding: 0.85rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--texto);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .campo input:focus,
+    .campo select:focus,
+    .campo textarea:focus {
+      border-color: var(--verde-musgo);
+    }
+
+    .campo select { cursor: pointer; }
+    .campo textarea { resize: vertical; min-height: 80px; }
+
+    /* Horários disponíveis */
+    #horarios-wrapper {
+      margin-bottom: 1.25rem;
+    }
+
+    #horarios-wrapper label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--verde-musgo);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    .grade-horarios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .btn-horario {
+      background: var(--branco);
+      border: 1px solid var(--verde-palido);
+      padding: 0.55rem 1.1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--texto-suave);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-horario:hover {
+      border-color: var(--verde-musgo);
+      color: var(--verde-escuro);
+    }
+
+    .btn-horario.ativo {
+      background: var(--verde-escuro);
+      border-color: var(--verde-escuro);
+      color: var(--verde-claro);
+    }
+
+    .btn-horario.ocupado {
+      opacity: 0.35;
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+
+    .msg-horarios {
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+      font-style: italic;
+    }
+
+    .btn-enviar {
+      background: var(--verde-escuro);
+      color: var(--verde-palido);
+      border: none;
+      padding: 1.1rem 3rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-enviar:hover:not(:disabled) {
+      background: var(--verde-musgo);
+      transform: translateY(-2px);
+    }
+
+    .btn-enviar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ---- FEEDBACK ---- */
+    .feedback {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--verde-musgo);
+      background: var(--verde-creme);
+    }
+
+    .feedback.erro { border-color: #b05555; background: #fdf2f2; }
+    .feedback.visivel { display: block; }
+
+    .feedback-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--verde-escuro);
+      margin-bottom: 0.3rem;
+    }
+
+    .feedback.erro .feedback-titulo { color: #8b3333; }
+
+    .feedback-texto {
+      font-size: 0.88rem;
+      color: var(--texto-suave);
+      line-height: 1.6;
+    }
+
+    /* ---- RODAPÉ ---- */
+    footer {
+      background: var(--verde-escuro);
+      padding: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--verde-palido);
+    }
+
+    .footer-logo span { font-style: italic; color: var(--verde-claro); }
+
+    footer p {
+      font-size: 0.78rem;
+      color: var(--verde-claro);
+      opacity: 0.5;
+      letter-spacing: 0.05em;
+    }
+
+    /* ---- LOADING ---- */
+    .spinner {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid var(--verde-palido);
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---- AVISO API ---- */
+    .aviso-api {
+      background: #fff8e1;
+      border-left: 3px solid #f0b429;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: #5a4a00;
+      line-height: 1.6;
+    }
+
+    .aviso-api strong { font-weight: 500; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header>
+    <nav>
+      <div class="logo">Bheatriz <span>Freitas</span></div>
+      <a href="#agendar">Agendar →</a>
+    </nav>
+
+    <div class="hero-content">
+      <p class="hero-tag">Nail Studio · São Paulo</p>
+      <h1 class="hero-title">
+        Unhas que<br/>
+        <em>contam</em><br/>
+        histórias.
+      </h1>
+      <p class="hero-sub">
+        Agendamento online simples e rápido. Escolha o serviço, a data e o horário — e deixe o resto com a Bheatriz.
+      </p>
+      <a href="#agendar" class="btn-agendar">Agendar agora</a>
+    </div>
+
+    <div class="hero-scroll">↓ ver serviços</div>
+  </header>
+
+  <!-- SERVIÇOS -->
+  <section class="servicos" id="servicos">
+    <p class="section-label">O que oferecemos</p>
+    <h2 class="section-title">Escolha seu <em>serviço</em></h2>
+
+    <div class="grid-servicos">
+      <div class="card-servico" data-servico="Manicure Simples" onclick="selecionarServico(this)">
+        <svg class="serv-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+          <path d="M8 12h8M12 8v8"/>
+        </svg>
+        <div class="serv-nome">Manicure Simples</div>
+        <div class="serv-desc">Cutícula, lima e esmalte tradicional.</div>
+        <div class="serv-duracao">⏱ 45 min</div>
+      </div>
+
+      <div class="card-servico" data-servico="Manicure em Gel" onclick="selecionarServico(this)">
+        <svg class="serv-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9.5 2a.5.5 0 0 1 .5.5V4h4V2.5a.5.5 0 0 1 1 0V4h1.5A1.5 1.5 0 0 1 18 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 18.5v-13A1.5 1.5 0 0 1 7.5 4H9V2.5a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+        <div class="serv-nome">Manicure em Gel</div>
+        <div class="serv-desc">Acabamento duradouro com gel LED.</div>
+        <div class="serv-duracao">⏱ 75 min</div>
+      </div>
+
+      <div class="card-servico" data-servico="Pedicure Simples" onclick="selecionarServico(this)">
+        <svg class="serv-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <ellipse cx="12" cy="12" rx="7" ry="9"/>
+          <path d="M8.5 8.5c1-1 3-1 5 0"/>
+        </svg>
+        <div class="serv-nome">Pedicure Simples</div>
+        <div class="serv-desc">Esfoliação, cutícula e esmaltação.</div>
+        <div class="serv-duracao">⏱ 60 min</div>
+      </div>
+
+      <div class="card-servico" data-servico="Pedicure Spa" onclick="selecionarServico(this)">
+        <svg class="serv-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
+        </svg>
+        <div class="serv-nome">Pedicure Spa</div>
+        <div class="serv-desc">Banho relaxante + massagem + esmaltação.</div>
+        <div class="serv-duracao">⏱ 90 min</div>
+      </div>
+
+      <div class="card-servico" data-servico="Combo Mani + Pedi" onclick="selecionarServico(this)">
+        <svg class="serv-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/>
+        </svg>
+        <div class="serv-nome">Combo Mani + Pedi</div>
+        <div class="serv-desc">Os dois juntos com desconto especial.</div>
+        <div class="serv-duracao">⏱ 90 min</div>
+      </div>
+
+      <div class="card-servico" data-servico="Nail Art" onclick="selecionarServico(this)">
+        <svg class="serv-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <div class="serv-nome">Nail Art</div>
+        <div class="serv-desc">Designs exclusivos sob consulta.</div>
+        <div class="serv-duracao">⏱ 90–120 min</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO DE AGENDAMENTO -->
+  <section class="agendamento" id="agendar">
+    <div class="form-wrapper">
+      <p class="section-label">Reservar horário</p>
+      <h2 class="section-title">Seu <em>agendamento</em></h2>
+
+      <div class="aviso-api" id="aviso-api">
+        <strong>⚙️ Configuração necessária:</strong> Substitua o valor de <code>API_URL</code> no início do JavaScript pelo link da sua implantação do Google Apps Script.
+      </div>
+
+      <div class="form-grid">
+        <div class="campo">
+          <label>Nome completo</label>
+          <input type="text" id="nome" placeholder="Seu nome" />
+        </div>
+        <div class="campo">
+          <label>WhatsApp</label>
+          <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" />
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="campo">
+          <label>Serviço</label>
+          <select id="servico">
+            <option value="">Selecione um serviço</option>
+            <option>Manicure Simples</option>
+            <option>Manicure em Gel</option>
+            <option>Pedicure Simples</option>
+            <option>Pedicure Spa</option>
+            <option>Combo Mani + Pedi</option>
+            <option>Nail Art</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label>Data</label>
+          <input type="date" id="data" />
+        </div>
+      </div>
+
+      <div id="horarios-wrapper">
+        <label>Horário disponível</label>
+        <div class="grade-horarios" id="grade-horarios">
+          <span class="msg-horarios">Selecione uma data para ver os horários.</span>
+        </div>
+      </div>
+
+      <div class="campo" style="margin-bottom:1.25rem">
+        <label>Observações (opcional)</label>
+        <textarea id="obs" placeholder="Ex: alergia a algum produto, preferência de cor..."></textarea>
+      </div>
+
+      <button class="btn-enviar" id="btn-enviar" onclick="enviarAgendamento()">
+        Confirmar agendamento
+      </button>
+
+      <div class="feedback" id="feedback">
+        <div class="feedback-titulo" id="feedback-titulo"></div>
+        <div class="feedback-texto" id="feedback-texto"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <div class="footer-logo">Bheatriz <span>Freitas</span></div>
+    <p>Nail Studio · Agendamento online</p>
+    <p>© 2025 · Todos os direitos reservados</p>
+  </footer>
+
+  <script>
+    // =============================================
+    // ⚠️ SUBSTITUA pela URL da sua implantação
+    //    do Google Apps Script
+    // =============================================
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzmTyp8dpyVNXqojG1I2-LdY-4vabDunHJbEUtmkPcC30dlybysfdP7yqutbBSrtkd44g/exec';
+
+    // --- Sincroniza clique no card com o select ---
+    function selecionarServico(card) {
+      document.querySelectorAll('.card-servico').forEach(c => c.classList.remove('selecionado'));
+      card.classList.add('selecionado');
+      document.getElementById('servico').value = card.dataset.servico;
+    }
+
+    // --- Data mínima = hoje ---
+    const hoje = new Date().toISOString().split('T')[0];
+    document.getElementById('data').min = hoje;
+
+    // --- Ao mudar a data, busca horários ---
+    document.getElementById('data').addEventListener('change', function () {
+      const data = this.value;
+      if (!data) return;
+
+      const grade = document.getElementById('grade-horarios');
+      grade.innerHTML = '<span class="msg-horarios"><span class="spinner"></span> Buscando horários...</span>';
+
+      if (API_URL === 'SUA_URL_DO_APPS_SCRIPT_AQUI') {
+        // Modo demonstração sem API
+        setTimeout(() => exibirHorarios(['09:00','10:00','11:00','14:00','15:00','16:00','17:00']), 600);
+        return;
+      }
+
+      fetch(`${API_URL}?acao=horarios&data=${formatarData(data)}`)
+        .then(r => r.json())
+        .then(d => exibirHorarios(d.horarios || []))
+        .catch(() => {
+          grade.innerHTML = '<span class="msg-horarios">Erro ao carregar horários. Tente novamente.</span>';
+        });
+    });
+
+    function formatarData(iso) {
+      const [y, m, d] = iso.split('-');
+      return `${d}/${m}/${y}`;
+    }
+
+    let horarioSelecionado = '';
+
+    function exibirHorarios(lista) {
+      const grade = document.getElementById('grade-horarios');
+      if (!lista.length) {
+        grade.innerHTML = '<span class="msg-horarios">Nenhum horário disponível nesta data.</span>';
+        return;
+      }
+      grade.innerHTML = '';
+      lista.forEach(h => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-horario';
+        btn.textContent = h;
+        btn.onclick = () => {
+          document.querySelectorAll('.btn-horario').forEach(b => b.classList.remove('ativo'));
+          btn.classList.add('ativo');
+          horarioSelecionado = h;
+        };
+        grade.appendChild(btn);
+      });
+    }
+
+    // --- Enviar agendamento ---
+    function enviarAgendamento() {
+      const nome     = document.getElementById('nome').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const servico  = document.getElementById('servico').value;
+      const data     = document.getElementById('data').value;
+      const obs      = document.getElementById('obs').value.trim();
+
+      if (!nome || !whatsapp || !servico || !data || !horarioSelecionado) {
+        mostrarFeedback('erro', 'Campos incompletos', 'Por favor, preencha todos os campos e selecione um horário.');
+        return;
+      }
+
+      const btn = document.getElementById('btn-enviar');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Confirmando...';
+
+      if (API_URL === 'SUA_URL_DO_APPS_SCRIPT_AQUI') {
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = 'Confirmar agendamento';
+          mostrarFeedback('ok', 'Agendamento confirmado! ✨',
+            `Olá, ${nome}! Seu horário para ${servico} no dia ${formatarData(data)} às ${horarioSelecionado} foi reservado. Você receberá uma confirmação pelo WhatsApp em breve.`);
+        }, 1200);
+        return;
+      }
+
+      fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          acao: 'criar',
+          nome, whatsapp, servico,
+          data: formatarData(data),
+          horario: horarioSelecionado,
+          obs
+        })
+      })
+      .then(r => r.json())
+      .then(d => {
+        btn.disabled = false;
+        btn.textContent = 'Confirmar agendamento';
+        if (d.sucesso) {
+          mostrarFeedback('ok', 'Agendamento confirmado! ✨',
+            `Olá, ${nome}! Seu horário para ${servico} no dia ${formatarData(data)} às ${horarioSelecionado} foi reservado com sucesso. Código: ${d.id}`);
+          document.getElementById('nome').value = '';
+          document.getElementById('whatsapp').value = '';
+          document.getElementById('obs').value = '';
+          document.getElementById('data').value = '';
+          horarioSelecionado = '';
+          document.getElementById('grade-horarios').innerHTML =
+            '<span class="msg-horarios">Selecione uma data para ver os horários.</span>';
+        } else {
+          mostrarFeedback('erro', 'Não foi possível agendar', d.mensagem || 'Tente outro horário.');
+        }
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.textContent = 'Confirmar agendamento';
+        mostrarFeedback('erro', 'Erro de conexão', 'Verifique sua internet e tente novamente.');
+      });
+    }
+
+    function mostrarFeedback(tipo, titulo, texto) {
+      const el = document.getElementById('feedback');
+      el.className = 'feedback visivel' + (tipo === 'erro' ? ' erro' : '');
+      document.getElementById('feedback-titulo').textContent = titulo;
+      document.getElementById('feedback-texto').textContent = texto;
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+</body>
+</html>
